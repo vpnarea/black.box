@@ -139,7 +139,7 @@ name | description | example
 AF | IP address family | 0 = detect; 4 = IPv4; 6 = IPv6
 ALPHA_2 | ISO Alpha-2 country code | gb
 API_HOST | API host | https://api.belodedenko.me
-API_SECRET | API pre-shared secret | `base64.b64encode(hashlib.sha256(...))`
+API_SECRET | API pre-shared secret | `openssl rand -hex 16`
 API_VERSION | API version | 1.0
 AS_NUMS | space separated list of one or more AS numbers to policy route | AS1234 AS5678
 AUTH | OpenVPN network packet authentication | None
