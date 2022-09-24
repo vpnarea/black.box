@@ -20,7 +20,6 @@ assets:
 data:
   # https://github.com/belodetek/black.box/blob/master/unzoner/README.md#service-variables
   applicationEnvironmentVariables:
-    - SOUND_VOLUME: 75
     - FRAGMENT: 1300
     - HW_MODE: g
     - IEEE80211N: 1
@@ -44,4 +43,4 @@ data:
     - raspberrypi3
     - raspberrypi3-64
     - raspberrypi4-64
-version: 1.2.21
+version: 1.2.22

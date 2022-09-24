@@ -24,7 +24,7 @@ build-variables:
       # https://nuitka.net/
       - COMPILE_CODE=1
       # (e.g.) dig +short us.{{ DNS_SUB_DOMAIN }}.{{ DNS_DOMAIN }}
-      - DNS_SUB_DOMAIN=blackbox
+      - DNS_SUB_DOMAIN=colibri
 
 build-secrets:
   global:

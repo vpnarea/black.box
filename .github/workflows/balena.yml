@@ -10,7 +10,7 @@ on:
 
 env:
   ENVIRONMENT: balena-cloud.com
-  BLOCK_PREFIX: belodetek/unzoner
+  BLOCK_PREFIX: vpnarea/unzoner
   VERBOSE: true
 
 jobs:
@@ -215,20 +215,20 @@ jobs:
       matrix:
         fleet:
           # black.box Unzoner fleets
-          - belodetek/blackbox-aarch64
-          - belodetek/blackbox-amd64
-          - belodetek/blackbox-amd64-raw
-          - belodetek/blackbox-armv7hf
+          - vpnarea/colibri-aarch64
+          - vpnarea/colibri-amd64
+          - vpnarea/colibri-amd64-raw
+          - vpnarea/colibri-armv7hf
         # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations
         include:
           - arch: aarch64
-            fleet: belodetek/blackbox-aarch64
+            fleet: vpnarea/colibri-aarch64
           - arch: amd64
-            fleet: belodetek/blackbox-amd64
+            fleet: vpnarea/colibri-amd64
           - arch: amd64
-            fleet: belodetek/blackbox-amd64-raw
+            fleet: vpnarea/colibri-amd64-raw
           - arch: armv7hf
-            fleet: belodetek/blackbox-armv7hf
+            fleet: vpnarea/colibri-armv7hf
 
     steps:
       - uses: actions/checkout@v3
@@ -245,7 +245,7 @@ jobs:
 
           arch_version='${{ needs.publish.outputs[format('{0}_version', matrix.arch)] }}'
 
-          sed -i "s#FROM bh.cr/${{ matrix.fleet }}-%%BALENA_ARCH%%#FROM bh.cr/${{ matrix.fleet }}-%%BALENA_ARCH%%/${arch_version}#g" Dockerfile.template
+          sed -i "s#FROM bh.cr/${{ env.BLOCK_PREFIX }}-%%BALENA_ARCH%%#FROM bh.cr/${{ env.BLOCK_PREFIX }}-%%BALENA_ARCH%%/${arch_version}#g" Dockerfile.template
 
       - name: push draft or finalise release
         id: build

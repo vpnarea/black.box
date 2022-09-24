@@ -1,2 +1,2 @@
-# https://hub.balena.io/organizations/belodetek/blocks
-FROM bh.cr/belodetek/unzoner-%%BALENA_ARCH%%
+# https://hub.balena.io/organizations/vpnarea/blocks
+FROM bh.cr/vpnarea/unzoner-%%BALENA_ARCH%%
