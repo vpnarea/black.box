@@ -372,14 +372,11 @@ def get_container_id():
 	try:
 		result = run_shell_cmd(cmd)
 		if DEBUG: print('run_shell_cmd: {}'.format(result))
-		assert result[0] == 0
-		assert result[1]
-	except Exception as e:
-		print('{}: e={}'.format(
-			stack()[0][3],
-			repr(e)
-		))
-	return result[1].strip('\n')
+		assert result[0] == 0 and result[1]
+	except Exception:
+		if DEBUG: print_exc()
+
+	return result[1].decode().strip('\n')
 
 
 @retry(Exception, cdata='method={}'.format(stack()[0][3]))
