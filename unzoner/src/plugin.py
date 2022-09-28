@@ -89,7 +89,7 @@ def log_user_conns():
 # Colibri connect (VPNArea)
 @retry(Exception, cdata='method={}'.format(stack()[0][3]))
 def client_connect(username=None):
-	print("plugin='{}' user='{}' conns_tracking='{}' auth_type='{}'".format(
+	print("plugin='{}' user='{}' conns_tracking='{}'".format(
 		DNS_SUB_DOMAIN,
 		username,
 		COLIBRI_CONNS_TRACKING
@@ -109,7 +109,7 @@ def client_connect(username=None):
 # Colibri disconnect (VPNArea)
 @retry(Exception, cdata='method={}'.format(stack()[0][3]))
 def client_disconnect(username=None):
-	print("plugin='{}' user='{}' conns_tracking='{}' auth_type='{}'".format(
+	print("plugin='{}' user='{}' conns_tracking='{}'".format(
 		DNS_SUB_DOMAIN,
 		username,
 		COLIBRI_CONNS_TRACKING
