@@ -17,9 +17,9 @@ ip link set dev ${1} mtu ${LINK_MTU_SERVER}
 
 log 'adding ipv4 rules...'
 if [[ ! "${TCP_PORTS}" == "#" ]] && [[ ! "${UDP_PORTS}" == "#" ]]; then
-    with_backoff iptables --wait -P FORWARD DROP
+    with_backoff ip4tables --wait -P FORWARD DROP
 else
-    with_backoff iptables --wait -P FORWARD ACCEPT
+    with_backoff ip4tables --wait -P FORWARD ACCEPT
 fi
 
 for proto in ${TUN_PROTO}; do

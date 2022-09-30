@@ -11,9 +11,9 @@ log "server-down: \$0=$0 \$1=$1 \$2=$2 \$3=$3 \$5=$4 \$5=$5 \$6=$6 \$7=$7 \$8=$8
 
 log 'removing ipv4 rules...'
 if [[ ! "${TCP_PORTS}" == "#" ]] && [[ ! "${UDP_PORTS}" == "#" ]]; then
-    with_backoff iptables --wait -P FORWARD ACCEPT
+    with_backoff ip4tables --wait -P FORWARD ACCEPT
 else
-    with_backoff iptables --wait -P FORWARD ACCEPT
+    with_backoff ip4tables --wait -P FORWARD ACCEPT
 fi
 
 for proto in ${TUN_PROTO}; do
