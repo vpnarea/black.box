@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+shopt -s expand_aliases
 
 [ -e "/root/functions" ] && . /root/functions
 [ -e "/dev/shm/.env" ] && . /dev/shm/.env
 
 if [[ "${DEBUG}" == "1" ]]; then
     env
+
+    alias
 fi
 
 log "server-down: \$0=$0 \$1=$1 \$2=$2 \$3=$3 \$5=$4 \$5=$5 \$6=$6 \$7=$7 \$8=$8 \$9=$9"
@@ -172,12 +175,14 @@ if [[ "${SNIPROXY_ENABLED}" == "1" ]]; then
     killall sniproxy
 fi
 
-[ -f ${DATADIR}/docker4.rules ]\
-  && log 'recovering Docker iptables chains...'\
-  && iptables-restore -n < ${DATADIR}/docker4.rules || true
+if [[ -f $DATADIR/docker4.rules ]]; then
+    log 'recovering DOCKER|BALENA iptables rules...'
+    iptables-restore -n < "${DATADIR}/docker4.rules" || true
+fi
 
-if [[ "${AF}" == "6" ]] && [[ $(ip6tables -t nat -L) ]]; then
-    [ -f ${DATADIR}/docker4.rules ]\
-    && log 'recovering Docker ip6tables chains...'\
-    && ip6tables-restore -n < ${DATADIR}/docker6.rules || true
+if [[ $AF == '4' ]] && [[ $(ip6tables -t nat -L) ]]; then
+    if [[ -f $DATADIR/docker6.rules ]]; then
+        log 'recovering DOCKER|BALENA ip6tables rules...'
+        ip6tables-restore -n < "${DATADIR}/docker6.rules" || true
+    fi
 fi
